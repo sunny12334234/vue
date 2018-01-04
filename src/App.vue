@@ -1,13 +1,26 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
     <router-view/>
   </div>
 </template>
 
 <script>
+var mixin = {
+  created: function () {
+    console.log('混合对象的钩子被调用')
+  }
+}
+var mixin2 = {
+  created: function () {
+    console.log('混合对象的钩子被调用2')
+  }
+}
 export default {
-  name: 'app'
+  name: 'app',
+  mixins: [mixin,mixin2],
+  created: function () {
+    console.log('组件钩子被调用')
+  }
 }
 </script>
 

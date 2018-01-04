@@ -1,53 +1,104 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
-  </div>
+    <div id="index">
+        <header class="mui-bar mui-bar-nav">
+            <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            <h1 class="mui-title">支付方式</h1>
+        </header>
+        <div class="mui-content" onclick="alert(1)">
+        <input v-focus>
+        <p v-demo:foo.a.b="imgSrc"></p>
+            <div class="mui-card" >
+                <div class="mui-card-header">支付宝免密支付</div>
+                <div class="mui-card-content" onclick="alert(2)">
+                    <span class="mui-icon mui-icon-plusempty" onclick="alert(3)"></span>
+                </div>
+                <div class="mui-card-footer"><img :src="baseImg+imgSrc"></div>
+            </div>
+        </div>
+    </div>
 </template>
 
+
 <script>
+
 export default {
-  name: 'HelloWorld',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+    name: 'share',
+    data() {
+        return {
+			baseImg: "http://ovjqyq4zd.bkt.clouddn.com/",
+			imgSrc: "alipay.png",
+        }
+    },
+    methods:{
+        alipay(){
+            mui.toast("本应用已支持支付宝支付")
+        }
+    },
+    directives: {
+      focus: {
+        // 指令的定义
+        inserted: function (el) {
+          el.focus()
+        }
+      },
+      demo:{
+        bind: function (el, binding, vnode) {
+          var s = JSON.stringify
+          el.innerHTML =
+            'name: '       + s(binding.name) + '<br>' +
+            'value: '      + s(binding.value) + '<br>' +
+            'expression: ' + s(binding.expression) + '<br>' +
+            'argument: '   + s(binding.arg) + '<br>' +
+            'modifiers: '  + s(binding.modifiers) + '<br>' +
+            'vnode keys: ' + Object.keys(vnode).join(', ')
+        }
+      }
     }
-  }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
+<style>
+#index {
+    font-family: "微软雅黑";
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+
+.mui-bar {
+    background: rgb(42, 130, 69);
 }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
+.mui-title {
+    color: #fff;
 }
 
-a {
-  color: #42b983;
+.mui-icon-person {
+}
+
+.mui-pull-left {
+
+    color: #fff;
+}
+
+
+.mui-card {
+    background: rgb(3, 171, 237);
+    color: #fff;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+
+.mui-card .mui-card-footer img {
+    width: 80px;
+    padding-top: 30px;
+}
+
+.mui-card .mui-card-content .mui-icon {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    font-size: 100px;
+    transform: translateY(-50%);
 }
 </style>
+
